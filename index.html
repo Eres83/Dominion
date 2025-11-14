@@ -38,8 +38,9 @@
     </nav>
 
     <main class="main-view">
+      <!-- VUE GÉNÉRALE -->
       <section id="view-overview" class="view active">
-        <h1>Colonie principale</h1>
+        <h1>Colonie principale (DEBUG V2)</h1>
         <div class="planet-card">
           <div class="planet-visual">
             <div class="planet-orbit"><div class="planet-sphere"></div></div>
@@ -62,24 +63,28 @@
         </table>
       </section>
 
+      <!-- RESSOURCES -->
       <section id="view-resources" class="view">
         <h1>Ressources</h1>
         <p>Gérez ici vos mines et votre production.</p>
         <div id="buildingsResources" class="grid"></div>
       </section>
 
+      <!-- INSTALLATIONS -->
       <section id="view-facilities" class="view">
         <h1>Installations</h1>
         <p>Bâtiments de support de votre empire.</p>
         <div id="buildingsFacilities" class="grid"></div>
       </section>
 
+      <!-- RECHERCHE -->
       <section id="view-research" class="view">
         <h1>Recherche</h1>
         <p>Développez de nouvelles technologies.</p>
         <div id="researchList" class="grid"></div>
       </section>
 
+      <!-- CHANTIER SPATIAL -->
       <section id="view-shipyard" class="view">
         <h1>Chantier spatial</h1>
         <p>Construisez votre flotte.</p>
@@ -88,12 +93,13 @@
         <h2>Flotte actuelle</h2>
         <table class="table" id="fleetTable">
           <thead>
-            <tr><th>Type</th><th>Quantité</th></tr>
+          <tr><th>Type</th><th>Quantité</th></tr>
           </thead>
           <tbody></tbody>
         </table>
       </section>
 
+      <!-- FLOTTES & BOSS -->
       <section id="view-fleet" class="view">
         <h1>Flotte & Boss ennemis</h1>
         <p>Attaques de boss pirates, empires et aliens. Elles sont <strong>aléatoires</strong> et <strong>rares</strong> (0 à 2 sur 48h).</p>
@@ -102,12 +108,14 @@
         <ul id="bossLog" class="log-list"></ul>
       </section>
 
+      <!-- GALAXIE -->
       <section id="view-galaxy" class="view">
         <h1>Galaxie</h1>
         <p>Visualisation simple de quelques systèmes stellaires (démo locale).</p>
         <div id="galaxyView" class="galaxy-grid"></div>
       </section>
 
+      <!-- OPTIONS -->
       <section id="view-settings" class="view">
         <h1>Options</h1>
         <div class="settings-group">
@@ -119,7 +127,7 @@
           <button id="resetGame" class="danger">Réinitialiser la partie</button>
         </div>
         <div class="settings-group">
-          <p><strong>Version :</strong> Star Dominion Online v2 — debug.</p>
+          <p><strong>Version :</strong> Star Dominion Online v2 (DEBUG)</p>
         </div>
       </section>
     </main>
