@@ -1,176 +1,130 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Star Dominion - Commandant</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Star Dominion - Commandant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 <div id="app">
-    <header class="top-bar">
-        <div class="brand">
-            <span class="brand-logo">☄</span>
-            <span class="brand-title">Star Dominion</span>
-        </div>
-        <div class="player-info">
-            Commandant :
-            <span id="playerNameDisplay"></span>
-        </div>
-        <div class="resources">
-            <div class="resource">
-                <span class="res-label">Métal</span>
-                <span id="metalAmount">0</span>
-            </div>
-            <div class="resource">
-                <span class="res-label">Cristal</span>
-                <span id="crystalAmount">0</span>
-            </div>
-            <div class="resource">
-                <span class="res-label">Deutérium</span>
-                <span id="deuteriumAmount">0</span>
-            </div>
-            <div class="resource">
-                <span class="res-label">Énergie</span>
-                <span id="energyAmount">0</span>
-            </div>
-        </div>
-        <div class="server-time">
-            <span id="serverTime"></span>
-        </div>
-    </header>
-
-    <div class="layout">
-        <nav class="sidebar">
-            <button class="nav-btn active" data-view="overview">Vue générale</button>
-            <button class="nav-btn" data-view="resources">Ressources</button>
-            <button class="nav-btn" data-view="facilities">Installations</button>
-            <button class="nav-btn" data-view="research">Recherche</button>
-            <button class="nav-btn" data-view="shipyard">Chantier spatial</button>
-            <button class="nav-btn" data-view="fleet">Flotte & Boss</button>
-            <button class="nav-btn" data-view="galaxy">Galaxie</button>
-            <button class="nav-btn" data-view="settings">Options</button>
-        </nav>
-
-        <main class="main-view">
-            <!-- OVERVIEW -->
-            <section id="view-overview" class="view active">
-                <h1>Colonie principale</h1>
-                <div class="planet-card">
-                    <div class="planet-visual">
-                        <div class="planet-orbit">
-                            <div class="planet-sphere"></div>
-                        </div>
-                    </div>
-                    <div class="planet-info">
-                        <p><strong>Nom :</strong> <span id="planetName">Nova Prime</span></p>
-                        <p><strong>Coordonnées :</strong> <span id="coords">1:1:1</span></p>
-                        <p><strong>Type :</strong> Colonie terrestre</p>
-                        <p><strong>Température :</strong> -20°C à 30°C</p>
-                    </div>
-                </div>
-
-                <h2>Production horaire</h2>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Ressource</th>
-                        <th>Production / heure</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Mines de métal</td>
-                        <td id="metalPerHour">0</td>
-                    </tr>
-                    <tr>
-                        <td>Mines de cristal</td>
-                        <td id="crystalPerHour">0</td>
-                    </tr>
-                    <tr>
-                        <td>Synthétiseur de deutérium</td>
-                        <td id="deuteriumPerHour">0</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- RESOURCES -->
-            <section id="view-resources" class="view">
-                <h1>Ressources</h1>
-                <p>Gérez ici vos mines et votre production.</p>
-                <div id="buildingsResources" class="grid"></div>
-            </section>
-
-            <!-- FACILITIES -->
-            <section id="view-facilities" class="view">
-                <h1>Installations</h1>
-                <p>Bâtiments de support de votre empire.</p>
-                <div id="buildingsFacilities" class="grid"></div>
-            </section>
-
-            <!-- RESEARCH -->
-            <section id="view-research" class="view">
-                <h1>Recherche</h1>
-                <p>Développez de nouvelles technologies.</p>
-                <div id="researchList" class="grid"></div>
-            </section>
-
-            <!-- SHIPYARD -->
-            <section id="view-shipyard" class="view">
-                <h1>Chantier spatial</h1>
-                <p>Construisez votre flotte.</p>
-                <div id="shipyardList" class="grid"></div>
-
-                <h2>Flotte actuelle</h2>
-                <table class="table" id="fleetTable">
-                    <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Quantité</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </section>
-
-            <!-- FLEET & BOSSES -->
-            <section id="view-fleet" class="view">
-                <h1>Flotte & Boss ennemis</h1>
-                <p>Attaques de boss pirates, empires et aliens. Elles sont <strong>aléatoires</strong> et <strong>rares</strong> (0 à 2 sur 48h).</p>
-                <div id="bossStatus" class="info-box"></div>
-                <h2>Journal des attaques de boss</h2>
-                <ul id="bossLog" class="log-list"></ul>
-            </section>
-
-            <!-- GALAXY -->
-            <section id="view-galaxy" class="view">
-                <h1>Galaxie</h1>
-                <p>Visualisation simple de quelques systèmes stellaires (démo locale).</p>
-                <div id="galaxyView" class="galaxy-grid"></div>
-            </section>
-
-            <!-- SETTINGS -->
-            <section id="view-settings" class="view">
-                <h1>Options</h1>
-                <div class="settings-group">
-                    <label for="playerNameInput">Nom du commandant :</label>
-                    <input type="text" id="playerNameInput" placeholder="Entrez votre nom">
-                    <button id="savePlayerName">Enregistrer</button>
-                </div>
-
-                <div class="settings-group">
-                    <button id="resetGame" class="danger">Réinitialiser la partie</button>
-                </div>
-
-                <div class="settings-group">
-                    <p><strong>Version :</strong> Star Dominion Online v1.0 — Ressources, bâtiments, recherches, flotte, galaxie & boss (pirates, empires, aliens).</p>
-                </div>
-            </section>
-        </main>
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-logo">☄</span>
+      <span class="brand-title">Star Dominion</span>
     </div>
-</div>
+    <div class="player-info">
+      Commandant : <span id="playerNameDisplay"></span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-label">Métal</span><span id="metalAmount">0</span></div>
+      <div class="resource"><span class="res-label">Cristal</span><span id="crystalAmount">0</span></div>
+      <div class="resource"><span class="res-label">Deutérium</span><span id="deuteriumAmount">0</span></div>
+      <div class="resource"><span class="res-label">Énergie</span><span id="energyAmount">0</span></div>
+    </div>
+    <div class="server-time"><span id="serverTime"></span></div>
+  </header>
 
-<script src="game.js"></script>
+  <div class="layout">
+    <nav class="sidebar">
+      <button class="nav-btn active" data-view="overview">Vue générale</button>
+      <button class="nav-btn" data-view="resources">Ressources</button>
+      <button class="nav-btn" data-view="facilities">Installations</button>
+      <button class="nav-btn" data-view="research">Recherche</button>
+      <button class="nav-btn" data-view="shipyard">Chantier spatial</button>
+      <button class="nav-btn" data-view="fleet">Flotte & Boss</button>
+      <button class="nav-btn" data-view="galaxy">Galaxie</button>
+      <button class="nav-btn" data-view="settings">Options</button>
+    </nav>
+
+    <main class="main-view">
+      <section id="view-overview" class="view active">
+        <h1>Colonie principale</h1>
+        <div class="planet-card">
+          <div class="planet-visual">
+            <div class="planet-orbit"><div class="planet-sphere"></div></div>
+          </div>
+          <div class="planet-info">
+            <p><strong>Nom :</strong> <span id="planetName">Nova Prime</span></p>
+            <p><strong>Coordonnées :</strong> <span id="coords">1:1:1</span></p>
+            <p><strong>Type :</strong> Colonie terrestre</p>
+            <p><strong>Température :</strong> -20°C à 30°C</p>
+          </div>
+        </div>
+        <h2>Production horaire</h2>
+        <table class="table">
+          <thead><tr><th>Ressource</th><th>Production / heure</th></tr></thead>
+          <tbody>
+            <tr><td>Mines de métal</td><td id="metalPerHour">0</td></tr>
+            <tr><td>Mines de cristal</td><td id="crystalPerHour">0</td></tr>
+            <tr><td>Synthétiseur de deutérium</td><td id="deuteriumPerHour">0</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="view-resources" class="view">
+        <h1>Ressources</h1>
+        <p>Gérez ici vos mines et votre production.</p>
+        <div id="buildingsResources" class="grid"></div>
+      </section>
+
+      <section id="view-facilities" class="view">
+        <h1>Installations</h1>
+        <p>Bâtiments de support de votre empire.</p>
+        <div id="buildingsFacilities" class="grid"></div>
+      </section>
+
+      <section id="view-research" class="view">
+        <h1>Recherche</h1>
+        <p>Développez de nouvelles technologies.</p>
+        <div id="researchList" class="grid"></div>
+      </section>
+
+      <section id="view-shipyard" class="view">
+        <h1>Chantier spatial</h1>
+        <p>Construisez votre flotte.</p>
+        <div id="shipyardList" class="grid"></div>
+
+        <h2>Flotte actuelle</h2>
+        <table class="table" id="fleetTable">
+          <thead>
+            <tr><th>Type</th><th>Quantité</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="view-fleet" class="view">
+        <h1>Flotte & Boss ennemis</h1>
+        <p>Attaques de boss pirates, empires et aliens. Elles sont <strong>aléatoires</strong> et <strong>rares</strong> (0 à 2 sur 48h).</p>
+        <div id="bossStatus" class="info-box"></div>
+        <h2>Journal des attaques de boss</h2>
+        <ul id="bossLog" class="log-list"></ul>
+      </section>
+
+      <section id="view-galaxy" class="view">
+        <h1>Galaxie</h1>
+        <p>Visualisation simple de quelques systèmes stellaires (démo locale).</p>
+        <div id="galaxyView" class="galaxy-grid"></div>
+      </section>
+
+      <section id="view-settings" class="view">
+        <h1>Options</h1>
+        <div class="settings-group">
+          <label for="playerNameInput">Nom du commandant :</label>
+          <input id="playerNameInput" type="text" placeholder="Entrez votre nom">
+          <button id="savePlayerName">Enregistrer</button>
+        </div>
+        <div class="settings-group">
+          <button id="resetGame" class="danger">Réinitialiser la partie</button>
+        </div>
+        <div class="settings-group">
+          <p><strong>Version :</strong> Star Dominion Online v2 — debug.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+<script src="main.js?v=2"></script>
 </body>
 </html>
