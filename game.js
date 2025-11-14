@@ -690,25 +690,40 @@ function renderBossLog(){
 }
 
 // --------- Settings ---------
-function initSettings(){
-  $("#playerNameInput").value = state.playerName;
-  $("#savePlayerName").addEventListener("click",()=>{
-    const val = $("#playerNameInput").value.trim();
-    if(val){
-      state.playerName = val;
-      saveState();
-      updateHeader();
+function initSettings() {
+    const input = $("#playerNameInput");
+    const btnSave = $("#savePlayerName");
+    const btnReset = $("#resetGame");
+
+    if (input) {
+        input.value = state.playerName;
     }
-  });
-  $("#resetGame").addEventListener("click",()=>{
-    if(!confirm("Réinitialiser la partie ?")) return;
-    state = deepClone(defaultState);
-    saveState();
-    tickResources();
-    updateHeader();
-    renderAll();
-  });
+
+    if (btnSave && input) {
+        btnSave.addEventListener("click", () => {
+            const val = input.value.trim();
+            if (val) {
+                state.playerName = val;
+                saveState();
+                updateHeader();
+            }
+        });
+    }
+
+    if (btnReset) {
+        btnReset.addEventListener("click", () => {
+            if (!confirm("Réinitialiser la partie ? Toutes les données locales seront perdues.")) return;
+            state = deepClone(defaultState);
+            saveState();
+            tickResources();
+            updateHeader();
+            renderAll();
+            renderBossStatus();
+            renderBossLog();
+        });
+    }
 }
+
 
 // --------- Render all ---------
 function renderAll(){
