@@ -267,19 +267,31 @@ function switchView(id){
   const btn = document.querySelector('.nav-btn[data-view="'+id+'"]'); if(btn) btn.classList.add("active");
 }
 
-function updateHeader(){
-  $("#playerNameDisplay").textContent = state.playerName;
-  $("#planetName").textContent = state.planetName;
-  $("#coords").textContent = state.coords;
-  $("#metalAmount").textContent = formatNumber(state.resources.metal);
-  $("#crystalAmount").textContent = formatNumber(state.resources.crystal);
-  $("#deuteriumAmount").textContent = formatNumber(state.resources.deuterium);
-  $("#energyAmount").textContent = formatNumber(state.resources.energy);
-  const p = getProductionPerHour();
-  $("#metalPerHour").textContent = formatNumber(p.metalPerHour);
-  $("#crystalPerHour").textContent = formatNumber(p.crystalPerHour);
-  $("#deuteriumPerHour").textContent = formatNumber(p.deuteriumPerHour);
+function updateHeader() {
+    // petite fonction utilitaire pour éviter les erreurs si l'élément n'existe pas
+    function setText(id, value) {
+        const el = $(id);
+        if (el) {
+            el.textContent = value;
+        }
+    }
+
+    setText("playerNameDisplay", state.playerName);
+    setText("planetName", state.planetName);
+    setText("coords", state.coords);
+
+    setText("metalAmount",     formatNumber(state.resources.metal));
+    setText("crystalAmount",   formatNumber(state.resources.crystal));
+    setText("deuteriumAmount", formatNumber(state.resources.deuterium));
+    setText("energyAmount",    formatNumber(state.resources.energy));
+
+    const { metalPerHour, crystalPerHour, deuteriumPerHour } = getProductionPerHour();
+
+    setText("metalPerHour",     formatNumber(metalPerHour));
+    setText("crystalPerHour",   formatNumber(crystalPerHour));
+    setText("deuteriumPerHour", formatNumber(deuteriumPerHour));
 }
+
 
 function updateServerTime(){
   $("#serverTime").textContent = new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
